@@ -16,7 +16,7 @@ When you publish the project, a corresponding item will be created in the online
 
 If you need to combine additional components in your .dmapp file, you should:
 
-1. Open the `MyUserDefinedApiFromGithub.csproj` file and ensure the `<GenerateDataminerPackage>` property is set to `False`.
+1. Open the `CatalogProdTestPackage.csproj` file and ensure the `<GenerateDataminerPackage>` property is set to `False`.
 
 1. Right-click your solution and select *Add* > *New Project*.
 

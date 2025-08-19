@@ -1,4 +1,4 @@
-namespace MyUserDefinedApiFromGithub
+namespace CatalogProdTestPackage
 {
 	using Skyline.DataMiner.Automation;
 	using Skyline.DataMiner.Net.Apps.UserDefinableApis;

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DMSScript options="272" xmlns="http://www.skyline.be/automation">
-	<Name>MyUserDefinedApiFromGithub</Name>
-	<Description></Description>
-	<Type>Automation</Type>
-	<Author>JanS</Author>
+	<Name>CatalogProdTestPackage</Name>
+	<Description>1st Catalog Test Item</Description>
+	<Type>Connector</Type>
+	<Author>Brecht Seys</Author>
 	<CheckSets>FALSE</CheckSets>
 	<Folder></Folder>
 
@@ -18,7 +18,7 @@
 
 	<Script>
 		<Exe id="1" type="csharp">
-			<Value><![CDATA[[Project:MyUserDefinedApiFromGithub]]]></Value>
+			<Value><![CDATA[[Project:CatalogProdTestPackage]]]></Value>
 			<!--<Param type="debug">true</Param>-->
 			<Message></Message>
 		</Exe>
