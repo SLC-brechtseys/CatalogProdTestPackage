@@ -1,0 +1,43 @@
+name: Build and Register a Catalog version
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Add this line to enable manual triggering
+
+jobs:
+  build_and_upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use GitHub run number for versioning
+        run: echo "VERSION=1.0.0.${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Use GitHub environment variable to store Catalog ID
+        run: echo "CATALOG_ID=ca7a1091-7357-4321-1234-ca7a10900b88" >> $GITHUB_ENV
+
+      # Install the Skyline DataMiner Tooling
+      - name: Install .NET Tools
+        run: |
+          dotnet tool install -g Skyline.DataMiner.CICD.Tools.Packager              
+          dotnet tool install -g Skyline.DataMiner.CICD.Tools.CatalogUpload
+
+      # Create the DataMiner protocol package
+      - name: Create DataMiner Protocol Package
+        run: dataminer-package-create dmprotocol "${{ github.workspace }}" --name catalog_registration_tutorial --output "${{ github.workspace }}/Packages"
+
+      # Upload the DataMiner protocol package
+      - name: Upload DataMiner Protocol Package to Catalog
+        id: upload_to_catalog
+        shell: bash
+        run: |
+          dataminer-catalog-upload with-registration \
+            --path-to-artifact "${{ github.workspace }}/Packages/catalog_registration_tutorial.dmprotocol" \
+            --artifact-version "${{ env.VERSION }}" \
+            --dm-catalog-token "${{ secrets.API_TOKEN }}" \
+            --catalog-identifier "${{ env.CATALOG_ID }}"
